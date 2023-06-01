@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+    <title>Autismo con Naturalidad</title>
+    <meta name="Description" content="Comparto estrategias y materiales para que, desde la comprensión y el respeto al autismo, nuestros hijos avancen sintiéndose orgullosos de sí mismos, valorados, regulados y cada vez más autosuficientes. ">
+
+    <link href="#schema" type="application/json" rel="exhibit-data" />
+    <link href="#data" type="application/json" rel="exhibit-data" />
+      
+    <!-- libs simile-exhibit -->
+
+    <script src="//api.simile-widgets.org/exhibit/current/lib/jquery.min.js" type="text/javascript">
+    </script>
+    <!-- <link rel="exhibit-extension" href="/js/exhibit/extensions/time/time-extension.js" />
+    -->
+    <script src="//api.simile-widgets.org/exhibit/current/exhibit-api.js" type="text/javascript"></script>
+    
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/bootstrap/3.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/bootstrap/3.3.0/css/bootstrap-theme.min.css">
+    <script src="//cdn.jsdelivr.net/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript">  
+        $(document).bind("dataload.exhibit", function() {
+            $("input").addClass("form-control");
+        });
+
+        $(document).bind("scriptsLoaded.exhibit", function () {
+            Exhibit.FunctionUtilities.registerSimpleMappingFunction("yearOf",
+                function (d) {
+                    return d.split('-')[0];
+                },
+                "number");
+        });
+    </script>
+
+    <script type="text/javascript">
+
+        function addYear(json) {
+            var items = json.items;
+            for (var i = 0; item = items[i]; i++) {
+                items[i].year = Exhibit.DateTime.parseIso8601DateTime(item.publishedAt).getFullYear();
+            }
+            return json;
+        }
+    </script>
+
+
+    <style>
+        #main-content {
+            background: white;
+        }
+
+        #title-panel {
+            padding: 0.25in 0.5in;
+        }
+
+        #top-panels {
+            padding: 0.5em 0.5in;
+            border-top: 1px solid #BCB79E;
+            border-bottom: 1px solid #BCB79E;
+            background: #FBF4D3;
+        }
+
+        .exhibit-tileView-body {
+            list-style: none;
+        }
+
+        .exhibit-collectionView-group-count {
+            display: none;
+        }
+
+        table.nobelist {
+            border: 1px solid #ddd;
+            padding: 0.5em;
+        }
+
+        div.name {
+            font-weight: bold;
+            font-size: 120%;
+        }
+
+        .relationship {
+            color: #888;
+        }
+
+        ddiv.video-thumbnail {
+            float: left;
+            width: 12vw;
+            height: 13em;
+            border: 1px solid #BCB79E;
+            background: #F0FFF0;
+            padding: 1em;
+            margin: 0.5em;
+            text-align: center;
+        }
+
+        div.video-timeline-lens {
+            padding: 1em;
+            text-align: center;
+        }
+
+        .card-content p {
+            font-size: 12px;
+        }
+
+        .exhibit-thumbnailView-body{
+            display: flex;
+            flex-wrap: wrap;
+            align-items: top;
+            justify-content: center;
+        }
+        .video-thumbnail {
+            width: 15vw;
+            height: auto;
+            border: 1px solid #BCB79E;
+            background: #F0FFF0;
+            padding: 1em;
+            margin: 0.5em;
+            text-align: center;
+        }
+        
+        @media (max-width: 768px) {
+            h1, .h1 {
+                font-size: 24px
+            }
+            .video-thumbnail {
+                width: 90vw;
+                height: auto;
+                border: 1px solid #BCB79E;
+                background: #F0FFF0;
+                padding: 1em;
+                margin: 0.5em;
+                text-align: center;
+            }
+            .card-content {
+                font-size: 8px;
+            }
+            div.exhibit-facet-body{
+                height: 5em;
+            }
+            div.exhibit-facet-value {
+                font-size: 12px;
+            }
+          }
+
+    </style>
+
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="static/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="static/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="static/favicon-16x16.png">
+<link rel="manifest" href="site.webmanifest">
+<link rel="mask-icon" href="static/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+
+
+
+</head>
+
+<body>
+<header>
+    <h1 class="text-center">Autismo con Naturalidad</h1>
+    <hr>
+</header>
+    
+        <div data-ex-role="exhibit-collection" data-ex-item-types="video"></div>
+        <div class="container">
+        <button class="visible-xs"  data-toggle="collapse" data-target="#controles"> <span class="glyphicon glyphicon-sort"></span></button>
+
+        <div class="row collapse in" id="controles">
+            <div class="col-md-4" data-ex-role="exhibit-facet" data-ex-facet-class="TextSearch" data-ex-facet-label="Buscar" 
+            data-ex-expressions=".label, .playlistId.label"></div>
+            <div class="col-md-4" data-ex-role="facet" data-ex-expression="yearOf(.publishedAt)" 
+            data-ex-collapsible="true" data-ex-facet-label="Año de publicación"
+            data-ex-sort-direction="reverse"></div>
+            <div class="col-md-4" data-ex-role="facet" data-ex-expression=".playlistId" data-ex-facet-label="Playlists"
+            data-ex-collapsible="true" data-ex-missing-label="Fuera de playlist" ></div>
+        </div>
+        
+
+        <div data-ex-role="viewPanel" style="padding: 1em 0.5in;">
+
+            <div data-ex-role="view" data-ex-view-class="Thumbnail" data-ex-showall="false" 
+            data-ex-orders=".publishedAt, .label" data-ex-grouped="false"
+                data-ex-paginate="true" data-ex-page-size="20" 
+                data-ex-directions="descending"
+                data-ex-show-controls="false" data-ex-possible-orders=".label ">
+
+                <div data-ex-role="exhibit-lens" style="display: none;" class="video-thumbnail">
+
+                    <div>
+                        <a target="_blank" data-ex-href-content="concat('https://www.youtube.com/watch?&v=', .url)">
+                            <img data-ex-src-content=".imagen" alt="Imagen" class="img-responsive">
+                        </a>
+
+                    </div>
+                    <div class="card-content">
+                        <a target="_blank" data-ex-href-content="concat('https://www.youtube.com/watch?&v=', .url)">
+                        <p data-ex-content=".label"></p>
+                        </a>
+                    </div>
+
+
+                </div>
+            </div>
+            <!--
+            <div data-ex-role="view" 
+                data-ex-view-class="Timeline" 
+                data-ex-start=".publishedAt" >
+                    <div data-ex-role="lens" class="video-timeline-lens" style="display: none;">
+                            <img data-ex-src-content=".imagen"  alt="portrait"/>
+                            <div><span data-ex-content=".label"></span></div>
+                            
+                    </div>
+
+            </div>
+            -->
+            
+
+        </div>
+    
+
+    </div>
+
+
+
+    <!--  Scripts-->
+    <div id="schema" style="display:none">
+        {"types": {"video": {"pluralLabel": "V\u00eddeos"}, "playlist": {"pluralLabel": "Playlists"}}, "properties": {"imagen": {"valueType": "url"}, "playlistId": {"valueType": "item"}, "publishedAt": {"valueType": "date", "label": "Fecha de publicaci\u00f3n"}}}
+    </div>
+    <div id="data" style="display:none">
+            {"items": [{"url": "TkNTwYreNbY", "label": "AUTISMO EN EL COLE: Visibilidad y concienciaci\u00f3n", "imagen": "https://i.ytimg.com/vi/TkNTwYreNbY/mqdefault.jpg", "playlistId": ["PLnMg8fawhH_jvgdJBW2ATO-LfP_YUE-7k"], "position": 0, "type": "video", "id": "UExuTWc4ZmF3aEhfanZnZEpCVzJBVE8tTGZQX1lVRS03ay41NkI0NEY2RDEwNTU3Q0M2", "publishedAt": "2021-09-09", "description": "Qu\u00e9 importante es darle visibilidad y concienciar sobre el autismo en el colegio. En este v\u00eddeo os cuento sobre ello, as\u00ed como todas las estrategias que seguimos nosotros.\nOs complemento la informac\u00ed\u00f3n (todo descargable) con esta publicaci\u00f3n de mi blog El sonido de la hierba al crecer donde ten\u00e9is los cuadernillos, las cartas, los materiales... \u00a1todo lo que usamos nosotros! Tambi\u00e9n incluyo c\u00f3mo le explicamos primero a mi hijo su autismo,  y despu\u00e9s los dos juntos a sus compa\u00f1eritos de clase.\nhttps://elsonidodelahierbaelcrecer.blogspot.com/2012/05/el-reto-de-contarle-erik-y-su-clase-que.html\nEs la publicaci\u00f3n m\u00e1s emotiva de mi blog.\nSi quieres saber m\u00e1s o quieres formarte en autismo, puedes matricularte en mis cursos online: completos, pr\u00e1cticos, paso a paso:\nhttps://elsonidodelahierbaalcrecer.teachable.com/courses\nAdelante siempre."}, {"url": "lPTmAXjio4Q", "label": "Prueba sobre Mentira superada", "imagen": "https://i.ytimg.com/vi/lPTmAXjio4Q/mqdefault.jpg", "playlistId": ["PLnMg8fawhH_j5ETKgpu7SCfdVOJ008DZU"], "position": 0, "type": "video", "id": "UExuTWc4ZmF3aEhfajVFVEtncHU3U0NmZFZPSjAwOERaVS41NkI0NEY2RDEwNTU3Q0M2", "publishedAt": "2016-10-17", "description": "Pasando una prueba de Teor\u00eda de la mente sobre la capacidad de mentir http://elsonidodelahierbaelcrecer.blogspot.de/2016/10/erik-supera-la-prueba-de-decidir-contar.html"}, {"url": "YIK2yXfrCfw", "label": "My Autism - by George", "imagen": "https://i.ytimg.com/vi/YIK2yXfrCfw/mqdefault.jpg", "playlistId": ["PLnMg8fawhH_j5ETKgpu7SCfdVOJ008DZU"], "position": 1, "type": "video", "id": "UExuTWc4ZmF3aEhfajVFVEtncHU3U0NmZFZPSjAwOERaVS4yODlGNEE0NkRGMEEzMEQy", "publishedAt": "2017-11-27", "description": "George's journey with autism at 9 years old. This is the video he shared with his fourth grade class to help them understand why he behaves the way he does sometimes (during lunch, group activities, recess, etc). This is just his own experience, and should not be taken as a blanket explanation of autism. The original audience was a fourth grade class. Please remember that (and be kind if possible) when commenting. Enjoy! \nPS - sadly, he doesn't actually like tacos; he likes the song at the end. \ud83e\udd13\n\nNew FB page: https://m.facebook.com/georgeautism/\n\nNEW! FAQ (just the answers to the questions my mom keeps reading over and over):\n-Yes, I have a fidget spinner; I'm not really that into it. \n-I play Minecraft in creative mode on my Mac; not in an interactive way, and I don't play it that much. I'm more into Scratch and Logic Pro X.\n-Yes, I will be getting braces! Thanks everyone for your concern with my orthodontia! . My mom sure loves the comments about my teeth.\n-Yes, I KNOW I inadvertently spit when I answered my mom's question in the cafeteria. No one was hurt, luckily; I hope you can still sleep at night despite my faux pas.\n-Thanks for watching, everyone!"}, {"url": "psro8amFY5I", "label": "Flexibilidad", "imagen": "https://i.ytimg.com/vi/psro8amFY5I/mqdefault.jpg", "playlistId": ["PLnMg8fawhH_j5ETKgpu7SCfdVOJ008DZU"], "position": 2, "type": "video", "id": "UExuTWc4ZmF3aEhfajVFVEtncHU3U0NmZFZPSjAwOERaVS4wMTcyMDhGQUE4NTIzM0Y5", "publishedAt": "2019-02-03", "description": ""}, {"url": "VcaSRFPND50", "label": "Estrategias para hablar por telefono", "imagen": "https://i.ytimg.com/vi/VcaSRFPND50/mqdefault.jpg", "playlistId": ["PLnMg8fawhH_j5ETKgpu7SCfdVOJ008DZU"], "position": 4, "type": "video", "id": "UExuTWc4ZmF3aEhfajVFVEtncHU3U0NmZFZPSjAwOERaVS4wOTA3OTZBNzVEMTUzOTMy", "publishedAt": "2021-06-14", "description": "Os presentamos estrategias y materiales para practicar hablar por tel\u00e9fono. La descarga gratuita aqu\u00ed https://elsonidodelahierbaelcrecer.blogspot.com/2015/02/guiones-con-material-para-hablar-por.html"}, {"url": "LwumCIfBBFY", "label": "Autismo: Historias interactivas para fomentar imaginaci\u00f3n", "imagen": "https://i.ytimg.com/vi/LwumCIfBBFY/mqdefault.jpg", "playlistId": ["PLnMg8fawhH_j5ETKgpu7SCfdVOJ008DZU"], "position": 5, "type": "video", "id": "UExuTWc4ZmF3aEhfajVFVEtncHU3U0NmZFZPSjAwOERaVS4xMkVGQjNCMUM1N0RFNEUx", "publishedAt": "2021-09-07", "description": "Fomentar la imaginaci\u00f3n y la fantas\u00eda es mucho m\u00e1s sencillo si partimos de intereses, usamos escenarios conocidos y hacemos al peque part\u00edcipe del desarrollo de la historia.\nEn este v\u00eddeo te muestro una actividad que siempre nos dio muy buenos resultados: las historias interactivas.\nYa me cuentas qu\u00e9 te parece y si la vas a utilizar.\nM\u00e1s informaci\u00f3n:\nhttps://www.elsonidodelahierbaalcrecer.com/\nFormaci\u00f3n en autismo completa, pr\u00e1ctica y paso a paso:\nhttps://elsonidodelahierbaalcrecer.teachable.com/p/jugando-juntos-1"}, {"url": "QXReq1U8yOU", "label": "La m\u00e1quina de los cuentos", "imagen": "https://i.ytimg.com/vi/QXReq1U8yOU/mqdefault.jpg", "playlistId": ["PLnMg8fawhH_j5ETKgpu7SCfdVOJ008DZU"], "position": 6, "type": "video", "id": "UExuTWc4ZmF3aEhfajVFVEtncHU3U0NmZFZPSjAwOERaVS41MzJCQjBCNDIyRkJDN0VD", "publishedAt": "2021-09-11", "description": "Con nuestra M\u00e1quina para crear Cuentos, con todas sus tarjetas descargables, podemos propiciar la fantas\u00eda de nuestros peques con autismo.\nTenemos comienzos, personajes, escenarios, emociones, di\u00e1logos, elementos de tensi\u00f3n, finales.... \u00a1un mundo infinito de posibilidades!\nDescargable en mi blog El sonido de la hierba al crecer:\nhttps://elsonidodelahierbaelcrecer.blogspot.com/2015/02/nuestra-maquina-con-sus-tarjetas-para.html\nY no te pierdas mis cursos online, formaci\u00f3n en autismo completa, pr\u00e1ctica y paso a paso:\nhttps://elsonidodelahierbaalcrecer.teachable.com/courses"}, {"url": "d_PS58yzDQU", "label": "Interacci\u00f3n e imitaci\u00f3n: pelotitas", "imagen": "https://i.ytimg.com/vi/d_PS58yzDQU/mqdefault.jpg", "playlistId": ["PLnMg8fawhH_h_LpKTDbO7pZu3RuNNARiB"], "position": 0, "type": "video", "id": "UExuTWc4ZmF3aEhfaF9McEtURGJPN3BadTNSdU5OQVJpQi41NkI0NEY2RDEwNTU3Q0M2", "publishedAt": "2016-08-26", "description": "Pod\u00e9is leer la informaci\u00f3n sobre las actividades de este v\u00eddeo en el blog:\nhttp://elsonidodelahierbaelcrecer.blogspot.de/2012/03/video-mejorando-el-tacto-y-el-contacto.html"}, {"url": "kTZXHTX91To", "label": "Los tres cerditos - die drei Schweinchen", "imagen": "https://i.ytimg.com/vi/kTZXHTX91To/mqdefault.jpg", "playlistId": ["PLnMg8fawhH_h_LpKTDbO7pZu3RuNNARiB"], "position": 1, "type": "video", "id": "UExuTWc4ZmF3aEhfaF9McEtURGJPN3BadTNSdU5OQVJpQi4wMTcyMDhGQUE4NTIzM0Y5", "publishedAt": "2016-08-30", "description": "Comprensi\u00f3n - Trabajamos los cuentos"}, {"url": "q7IQrsNZ5mM", "label": "Propiciando la comprensi\u00f2n: lenguaje receptivo", "imagen": "https://i.ytimg.com/vi/q7IQrsNZ5mM/mqdefault.jpg", "playlistId": ["PLnMg8fawhH_h_LpKTDbO7pZu3RuNNARiB"], "position": 2, "type": "video", "id": "UExuTWc4ZmF3aEhfaF9McEtURGJPN3BadTNSdU5OQVJpQi41MjE1MkI0OTQ2QzJGNzNG", "publishedAt": "2021-03-22", "description": "Vemos algunas estrategias para propiciar la comprensi\u00f3n del lenguaje en el autismo, haciendo uso del lenguaje receptivo o seguimiento de consignas.\nM\u00e1s informaci\u00f3n en mi blog El sonido de la hierba al crecer:\nhttps://elsonidodelahierbaelcrecer.blogspot.com/2020/09/estrategias-de-estimulacion-del.html\nY en la WEB:\nhttps://www.elsonidodelahierbaalcrecer.com/"}, {"url": "F-XXm5sqWYo", "label": "Autismo: favoreciendo interacci\u00f3n", "imagen": "https://i.ytimg.com/vi/F-XXm5sqWYo/mqdefault.jpg", "playlistId": ["PLnMg8fawhH_h_LpKTDbO7pZu3RuNNARiB"], "position": 3, "type": "video", "id": "UExuTWc4ZmF3aEhfaF9McEtURGJPN3BadTNSdU5OQVJpQi4wOTA3OTZBNzVEMTUzOTMy", "publishedAt": "2021-09-01", "description": "Interactuar y jugar juntos va a ser m\u00e1s sencillo si partimos de intereses para crear la actividad.\n\nA Erik le encantaba poner todo en fila... as\u00ed que ideamos una carretera con los Lego (una estructura guiada) con la finalidad de desaparcar, conducir, aparcar... y cuando fuimos ampliando/variando a\u00f1adimos echar gasolina.\nM\u00e1s motivadora fue a\u00fan usando las se\u00f1ales de tr\u00e1fico (otro tema de inter\u00e9s), para irlas colocando a los lados de la carretera.\n\n\u00bfQu\u00e9 os parece? Mi peque estaba comenzando a emitir los primeros sonidos y palabras. Tres a\u00f1itos, as\u00ed empez\u00f3.\n\nAdelante siempre."}, {"url": "X1wIG9Bl4sM", "label": "Jugamos y nos regulamos", "imagen": "https://i.ytimg.com/vi/X1wIG9Bl4sM/mqdefault.jpg", "playlistId": ["PLnMg8fawhH_h_LpKTDbO7pZu3RuNNARiB"], "position": 4, "type": "video", "id": "UExuTWc4ZmF3aEhfaF9McEtURGJPN3BadTNSdU5OQVJpQi4xMkVGQjNCMUM1N0RFNEUx", "publishedAt": "2021-09-20", "description": "La interacci\u00f3n unida a las actividades sensoriomotrices asientan las bases de la estimulaci\u00f3n en el autismo, pues fomentan intenci\u00f3n comunicativa, imitaci\u00f3n, regulaci\u00f3n y -fundamental- reciprocidad emocional al estar disfrutando juntos.\nOs lo cuento en este v\u00eddeo, donde adem\u00e1s os incluyo muchos juegos en concreto.\n\u00bfNecesitas saber m\u00e1s? Si te gustar\u00eda implicarte  en la estimulaci\u00f3n de tu peque\u00f1o, no te pierdas mi FORMACI\u00d3N ONLINE \"Jugando Juntos: Interacci\u00f3n, Comunicaci\u00f3n y Regulaci\u00f3n\". De acceso permanente, para que vay\u00e1is a vuestro ritmo.\nhttps://elsonidodelahierbaalcrecer.teachable.com/p/jugando-juntos-1\n\nRecomendado por cientos de familias y profesionales."}, {"url": "DcPFQgOMIhM", "label": "Autismo: Juego Simb\u00f3lico", "imagen": "https://i.ytimg.com/vi/DcPFQgOMIhM/mqdefault.jpg", "playlistId": ["PLnMg8fawhH_h_LpKTDbO7pZu3RuNNARiB"], "position": 5, "type": "video", "id": "UExuTWc4ZmF3aEhfaF9McEtURGJPN3BadTNSdU5OQVJpQi41MzJCQjBCNDIyRkJDN0VD", "publishedAt": "2021-09-26", "description": "Son muchas las actividades que podemos proponer, partiendo de gustos y de intereses, para lograr no solo el juego simb\u00f3lico en el autismo, sino disfrutar con \u00e9l. Tuber\u00edas, extintores, postes de la luz... las aves, dibujar, representaciones... \u00a1fueron nuestros grandes aliados!\nEn este m\u00e1s de media hora de v\u00eddeo os lo explico de forma pr\u00e1ctica paso a paso. Ya me contar\u00e9is qu\u00e9 os parece, cu\u00e1les hab\u00e9is puesto en marcha vosotros... \nSi deseas saber m\u00e1s y formarte conmigo, no te pierdas mis cursos online. Pr\u00e1cticos, completos, paso a paso. Acceso ilimitado, a tu ritmo.\nhttps://elsonidodelahierbaalcrecer.teachable.com/"}, {"url": "BhWCSZiw24Y", "label": "Autismo: dale RITMO", "imagen": "https://i.ytimg.com/vi/BhWCSZiw24Y/mqdefault.jpg", "playlistId": ["PLnMg8fawhH_h_LpKTDbO7pZu3RuNNARiB"], "position": 6, "type": "video", "id": "UExuTWc4ZmF3aEhfaF9McEtURGJPN3BadTNSdU5OQVJpQi5DQUNERDQ2NkIzRUQxNTY1", "publishedAt": "2021-09-25", "description": "\ud83c\udf31\ud83c\udf31\ud83c\udf31Dale ritmo a la estimulaci\u00f3n del lenguaje en el autismo. S\u00ed, incluye la percusi\u00f3n, las actividades con sonidos, la producci\u00f3n de sonidos con el cuerpo... \n\nGrandes precursores que adem\u00e1s van a favorecer el esquema corporal, la coordinaci\u00f3n y la planificaci\u00f3n. Tambi\u00e9n podemos propiciar la imitaci\u00f3n. Y son actividades reguladoras o focalizadoras de atenci\u00f3n.\n\nA partir de un a\u00f1ito, \u00a1m\u00fasica, maestros, a nuestro ritmo! Usa una cacerola con cucharas de palo, pero propicia tambi\u00e9n que haga los sonidos con su cuerpo.\n\nCu\u00e9ntame, \u00bfcu\u00e1les hac\u00e9is vosotros?\n\n\u00a1A seguir creando momentos felices mientras nuestros peques avanzan!\n\nEn el curso de atenci\u00f3n temprana Jugando Juntos: interacci\u00f3n, comunicaci\u00f3n y regulaci\u00f3n incluimos cientos de actividades."}, {"url": "3b5Kc4E1Byg", "label": "Autismo: juegos para favorecer miradas", "imagen": "https://i.ytimg.com/vi/3b5Kc4E1Byg/mqdefault.jpg", "playlistId": ["PLnMg8fawhH_h_LpKTDbO7pZu3RuNNARiB"], "position": 7, "type": "video", "id": "UExuTWc4ZmF3aEhfaF9McEtURGJPN3BadTNSdU5OQVJpQi45NDk1REZENzhEMzU5MDQz", "publishedAt": "2021-10-14", "description": "Captar miradas con actividades motivadoras y sin ser invasivos es lo que os propongo en este v\u00eddeo.\nPuedes complementarlo con el v\u00eddeo explicativo sobre captar y mantener la atenci\u00f3n, en este mismo canal:\nhttps://youtu.be/bOD1IJX7-xk\n\nTodo empieza con la semilla que plantas. Gracias por seguirme."}, {"url": "pjE7ucPwcZc", "label": "lectoescritura letra M - Buchstabe M erkennen", "imagen": "https://i.ytimg.com/vi/pjE7ucPwcZc/mqdefault.jpg", "playlistId": ["PLnMg8fawhH_h_VCRKF-jGrQ4ijdjGaw8S"], "position": 0, "type": "video", "id": "UExuTWc4ZmF3aEhfaF9WQ1JLRi1qR3JRNGlqZGpHYXc4Uy41NkI0NEY2RDEwNTU3Q0M2", "publishedAt": "2016-08-28", "description": "Un ejemplo de c\u00f3mo trabajamos lectoescritura.\nBuchstabe M erkennen."}, {"url": "fmE2I096r24", "label": "Grafomotricidad - Graphomotorik", "imagen": "https://i.ytimg.com/vi/fmE2I096r24/mqdefault.jpg", "playlistId": ["PLnMg8fawhH_h_VCRKF-jGrQ4ijdjGaw8S"], "position": 1, "type": "video", "id": "UExuTWc4ZmF3aEhfaF9WQ1JLRi1qR3JRNGlqZGpHYXc4Uy4yODlGNEE0NkRGMEEzMEQy", "publishedAt": "2016-08-29", "description": "Practicamos trazos - bei \u00fcben"}, {"url": "GY6QZsuxOfw", "label": "W\u00f6rter erkennen - reconocer palabras", "imagen": "https://i.ytimg.com/vi/GY6QZsuxOfw/mqdefault.jpg", "playlistId": ["PLnMg8fawhH_h_VCRKF-jGrQ4ijdjGaw8S"], "position": 2, "type": "video", "id": "UExuTWc4ZmF3aEhfaF9WQ1JLRi1qR3JRNGlqZGpHYXc4Uy4wMTcyMDhGQUE4NTIzM0Y5", "publishedAt": "2016-09-19", "description": "Juego con dado para reconocer palabras"}, {"url": "OmH1N97hoIw", "label": "Las familias de Aprendices Visuales, Anabel Cornago", "imagen": "https://i.ytimg.com/vi/OmH1N97hoIw/mqdefault.jpg", "playlistId": ["PLnMg8fawhH_hTQ9FcaV4KBglygy5uxkF2"], "position": 0, "type": "video", "id": "UExuTWc4ZmF3aEhfaFRROUZjYVY0S0JnbHlneTV1eGtGMi41NkI0NEY2RDEwNTU3Q0M2", "publishedAt": "2015-09-12", "description": "Reportaje realizado por la productora Weikinap sobre el proyecto \"Cuentos para Aprendices Visuales\" (www.aprendicesvisuales.org), donde la madre de Erik, Anabel Cornago, nos habla sobre el proyecto, los pictogramas y su propia experiencia con el autismo."}, {"url": "uuF2Fop5F8k", "label": "Campeo\u0301n pasito a pasito", "imagen": "https://i.ytimg.com/vi/uuF2Fop5F8k/mqdefault.jpg", "playlistId": ["PLnMg8fawhH_hTQ9FcaV4KBglygy5uxkF2"], "position": 1, "type": "video", "id": "UExuTWc4ZmF3aEhfaFRROUZjYVY0S0JnbHlneTV1eGtGMi4yODlGNEE0NkRGMEEzMEQy", "publishedAt": "2015-01-15", "description": "En Confidencial TV, conoce a Anabel Cornago, un ejemplo de madre y mujer, que a trav\u00e9s de su blog, el sonido de la hierba al crecer, comparte sus experiencias de vida junto a su peque\u00f1o hijo Erik con la premisa: \"Nada de conformismos: los problemas hay que encararlos con serenidad y con firmeza\"."}, {"url": "JpIuWfkyoUQ", "label": "Calmar comportamientos dif\u00edciles y autismo con Anabel Cornago", "imagen": "https://i.ytimg.com/vi/JpIuWfkyoUQ/mqdefault.jpg", "playlistId": ["PLnMg8fawhH_hTQ9FcaV4KBglygy5uxkF2", "PLnMg8fawhH_hNAQcFL5x5c6JuWIVy5fSg"], "position": 2, "type": "video", "id": "UExuTWc4ZmF3aEhfaFRROUZjYVY0S0JnbHlneTV1eGtGMi4wMTcyMDhGQUE4NTIzM0Y5", "publishedAt": "2019-04-25", "description": "Anabel Cornago, mam\u00e1 de un adolescente con autismo, creadora del blog El Sonido de la Hierba al crecer, un blog con miles de ideas e informaci\u00f3n para trabajar diferentes aspectos cognitivos, sensoriales, emocionales, sociales, motrices de ni\u00f1os y ni\u00f1as con autismo y otros desaf\u00edos del neuro-desarrollo.\n\n#ElEspaciodeLola\n\nelsonidodelahierbaelcrecer.blogspot.com"}, {"url": "xvShxVNYcGY", "label": "C\u00f3mo empezar", "imagen": "https://i.ytimg.com/vi/xvShxVNYcGY/mqdefault.jpg", "playlistId": ["PLnMg8fawhH_hNAQcFL5x5c6JuWIVy5fSg"], "position": 0, "type": "video", "id": "UExuTWc4ZmF3aEhfaE5BUWNGTDV4NWM2SnVXSVZ5NWZTZy41NkI0NEY2RDEwNTU3Q0M2", "publishedAt": "2016-08-25", "description": "intervenci\u00f3n en los comienzos"}, {"url": "HQIEoHpRUYY", "label": "Estrategias generales", "imagen": "https://i.ytimg.com/vi/HQIEoHpRUYY/mqdefault.jpg", "playlistId": ["PLnMg8fawhH_hNAQcFL5x5c6JuWIVy5fSg"], "position": 1, "type": "video", "id": "UExuTWc4ZmF3aEhfaE5BUWNGTDV4NWM2SnVXSVZ5NWZTZy4yODlGNEE0NkRGMEEzMEQy", "publishedAt": "2016-08-25", "description": "Estrategias generales y conductas"}, {"url": "hTFH-Mh8xcI", "label": "Nuestra historia, nos presentamos", "imagen": "https://i.ytimg.com/vi/hTFH-Mh8xcI/mqdefault.jpg", "playlistId": ["PLnMg8fawhH_hNAQcFL5x5c6JuWIVy5fSg"], "position": 2, "type": "video", "id": "UExuTWc4ZmF3aEhfaE5BUWNGTDV4NWM2SnVXSVZ5NWZTZy4wMTcyMDhGQUE4NTIzM0Y5", "publishedAt": "2016-08-25", "description": "Nos presentamos. Esta es nuestra historia"}, {"url": "68iI-XDajto", "label": "Sintomas Cl\u00e1sicos de Autismo, por Anabel Cornago", "imagen": "https://i.ytimg.com/vi/68iI-XDajto/mqdefault.jpg", "playlistId": ["PLnMg8fawhH_hNAQcFL5x5c6JuWIVy5fSg"], "position": 3, "type": "video", "id": "UExuTWc4ZmF3aEhfaE5BUWNGTDV4NWM2SnVXSVZ5NWZTZy41MjE1MkI0OTQ2QzJGNzNG", "publishedAt": "2016-04-02", "description": "Algunos Sintomas presentes en los Trastornos de Espectro Autista, TEA...\nAutismos, no autismo\n\nAutores:\nIdea general y Textos por Anabel Cornago y Dibujos por Moritz Liebeknecht"}, {"url": "joN9BCDyUyo", "label": "C\u00e1mara Nikon D500 - Rese\u00f1a", "imagen": "https://i.ytimg.com/vi/joN9BCDyUyo/mqdefault.jpg", "playlistId": ["PLnMg8fawhH_hNAQcFL5x5c6JuWIVy5fSg"], "position": 5, "type": "video", "id": "UExuTWc4ZmF3aEhfaE5BUWNGTDV4NWM2SnVXSVZ5NWZTZy4xMkVGQjNCMUM1N0RFNEUx", "publishedAt": "2017-01-23", "description": "Rese\u00f1a de la c\u00e1mara Nikon D500. En este tutorial de fotograf\u00eda veremos las caracter\u00edsticas principales de esta c\u00e1mara fotogr\u00e1fica recomendada para fotograf\u00eda de deportes, fotograf\u00eda de bodas y fotograf\u00eda de naturaleza.\n\nGuillermo Flores, Fot\u00f3grafo profesional en Guadalajara, Jalisco, M\u00e9xico - http://www.memoflores.com"}, {"url": "fAwdFC9g8Pg", "label": "De las manitas blandas al agarre del l\u00e1piz", "imagen": "https://i.ytimg.com/vi/fAwdFC9g8Pg/mqdefault.jpg", "playlistId": ["PLnMg8fawhH_hNAQcFL5x5c6JuWIVy5fSg"], "position": 6, "type": "video", "id": "UExuTWc4ZmF3aEhfaE5BUWNGTDV4NWM2SnVXSVZ5NWZTZy41MzJCQjBCNDIyRkJDN0VD", "publishedAt": "2021-01-26", "description": "M\u00e1s informaci\u00f3n en mi web\nhttps://www.elsonidodelahierbaalcrecer.com/"}, {"url": "nyhaz_9D9r4", "label": "Se\u00f1ales de Alerta de Autismo", "imagen": "https://i.ytimg.com/vi/nyhaz_9D9r4/mqdefault.jpg", "playlistId": ["PLnMg8fawhH_hNAQcFL5x5c6JuWIVy5fSg"], "position": 7, "type": "video", "id": "UExuTWc4ZmF3aEhfaE5BUWNGTDV4NWM2SnVXSVZ5NWZTZy5DQUNERDQ2NkIzRUQxNTY1", "publishedAt": "2021-09-05", "description": "Os comparto las se\u00f1ales de alerta del autismo. Una detecci\u00f3n precoz determina una atenci\u00f3n m\u00e1s temprana que va a cambiar el futuro de nuestros hijos.\nAdelante siempre.\nToda la estimulaci\u00f3n en autismo que hemos seguido la encuentras en mi web:\nhttps://www.elsonidodelahierbaalcrecer.com/\nTambi\u00e9n ofrezco formaci\u00f3n online completa, pr\u00e1ctica y paso a paso, de acceso permanente:\nhttps://elsonidodelahierbaalcrecer.teachable.com/courses"}, {"url": "qCoYJq8TQzg", "label": "Knopffresserchen", "imagen": "https://i.ytimg.com/vi/qCoYJq8TQzg/mqdefault.jpg", "playlistId": ["PLnMg8fawhH_hNAQcFL5x5c6JuWIVy5fSg"], "position": 8, "type": "video", "id": "UExuTWc4ZmF3aEhfaE5BUWNGTDV4NWM2SnVXSVZ5NWZTZy45NDk1REZENzhEMzU5MDQz", "publishedAt": "2021-09-06", "description": "Handmotorik \u00fcben mit Knopffresserchen:  \n\nIhr braucht: \u2022 einen Tennisball \u2022 zwei Wackelaugen \u2022 scharfes Teppichmesser o. \u00c4. \u2022 Kn\u00f6pfe, Spielchips, Pompons o. \u00c4 . \n\nSo geht's: Schneide mit dem Messer den Tennisball etwa bis zur Mitte auf und klebe zwei Wackelaugen \u00fcber den Schlitz \u2013 fertig ist das Knopffresserchen. Das Kind muss nun kr\u00e4ftig dr\u00fccken, damit das Fresserchen seinen Schlund \u00f6ffnet, um einen Knopf zu verschlingen. Danach kr\u00e4ftig sch\u00fctteln, damit der Knopf wieder herausf\u00e4llt.  \n\nMehr in meinem Buch HANDMOTORIK.\nhttps://www.autismushamburg-shop.de/"}, {"id": "PLnMg8fawhH_jvgdJBW2ATO-LfP_YUE-7k", "label": "concienciaci\u00f3n", "type": "playlist"}, {"id": "PLnMg8fawhH_j5ETKgpu7SCfdVOJ008DZU", "label": "emociones y ToM", "type": "playlist"}, {"id": "PLnMg8fawhH_g080O6f2n4TrReFPh-2Snn", "label": "comportamiento", "type": "playlist"}, {"id": "PLnMg8fawhH_h_LpKTDbO7pZu3RuNNARiB", "label": "Interacci\u00f3n", "type": "playlist"}, {"id": "PLnMg8fawhH_h_VCRKF-jGrQ4ijdjGaw8S", "label": "Lectoescritura", "type": "playlist"}, {"id": "PLnMg8fawhH_hTQ9FcaV4KBglygy5uxkF2", "label": "Entrevistas", "type": "playlist"}, {"id": "PLnMg8fawhH_hNAQcFL5x5c6JuWIVy5fSg", "label": "Presentaci\u00f3n general", "type": "playlist"}]}
+    </div>
+
+</body>
+
+</html>
